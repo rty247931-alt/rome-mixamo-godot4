@@ -1,4 +1,4 @@
-name: Export Godot Web
+name: Export and Deploy Godot Web
 
 on:
   push:
@@ -7,6 +7,12 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   export-web:
@@ -29,9 +35,21 @@ jobs:
           mkdir -p build/web
           godot --headless --path . --export-release "Web" build/web/index.html
 
-      - name: Upload Web build
+      - name: Upload Web build artifact
         uses: actions/upload-artifact@v4
         with:
           name: rome-city-web
           path: build/web/
           if-no-files-found: error
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
