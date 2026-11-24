@@ -30,6 +30,11 @@ jobs:
           version: 4.7-stable
           export-templates: true
 
+      - name: Install Arabic UI font
+        run: |
+          mkdir -p fonts
+          curl -fL "https://raw.githubusercontent.com/google/fonts/main/ofl/notosansarabic/NotoSansArabic%5Bwght%5D.ttf" -o fonts/NotoSansArabic.ttf
+
       - name: Import project assets
         run: godot --headless --editor --path . --quit
 
