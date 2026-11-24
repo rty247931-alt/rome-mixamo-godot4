@@ -1,0 +1,37 @@
+name: Export Godot Web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Install Godot and export templates
+        uses: solarlabyrinth/action-setup-godot@v3
+        with:
+          version: 4.7-stable
+          export-templates: true
+
+      - name: Import project assets
+        run: godot --headless --editor --path . --quit
+
+      - name: Export Web
+        run: |
+          mkdir -p build/web
+          godot --headless --path . --export-release "Web" build/web/index.html
+
+      - name: Upload Web build
+        uses: actions/upload-artifact@v4
+        with:
+          name: rome-city-web
+          path: build/web/
+          if-no-files-found: error
