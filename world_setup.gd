@@ -14,7 +14,7 @@ func _ready() -> void:
 func _add_collisions(root: Node) -> void:
     for child in root.get_children():
         if child is MeshInstance3D and child.mesh and child.mesh.get_surface_count() > 0:
-            var faces := child.mesh.get_faces()
+            var faces: PackedVector3Array = child.mesh.get_faces()
             if faces.size() >= 3:
                 var body := StaticBody3D.new()
                 body.name = child.name + "_Collision"
