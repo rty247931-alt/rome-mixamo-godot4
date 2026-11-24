@@ -1,0 +1,172 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://mixamo_player/systems/components/movement_component.gd" id="3_8h4do"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/Jump.wav" id="3_l7x70"]
+[ext_resource type="Script" path="res://mixamo_player/systems/components/crouch_component.gd" id="3_rclgo"]
+[ext_resource type="Script" path="res://mixamo_player/systems/components/head_bob_component.gd" id="5_87uja"]
+[ext_resource type="Script" path="res://mixamo_player/systems/components/fov_component.gd" id="6_tn8gd"]
+[ext_resource type="Script" path="res://mixamo_player/systems/components/interaction_component.gd" id="7_okfwm"]
+[ext_resource type="Script" path="res://mixamo_player/systems/components/footstep_component.gd" id="8_4qt65"]
+[ext_resource type="Script" path="res://mixamo_player/systems/resources/footstep_surface_data.gd" id="9_6g3n5"]
+[ext_resource type="Resource" path="res://mixamo_player/systems/resources/grass_footsteps.tres" id="10_mgvvd"]
+[ext_resource type="Resource" path="res://mixamo_player/systems/resources/default_footsteps.tres" id="11_mgvvd"]
+[ext_resource type="Script" path="res://mixamo_player/systems/components/fall_component.gd" id="12_d4apd"]
+[ext_resource type="Script" path="res://mixamo_player/systems/components/swimming_component.gd" id="13_mfato"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/01 - غوص عميق وانغماس في الماء مع فقاعات.wav" id="15_utphg"]
+[ext_resource type="Script" path="res://mixamo_player/systems/components/player_audio_component.gd" id="16_28gy6"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/خطوة على العشب 013.wav" id="17_htc74"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/المشي على العشب/المشي على العشب2.MP3" id="18_g2abb"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/المشي على العشب/المشي على العشب3.MP3" id="19_usugv"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/المشي على العشب/المشي على العشب4.MP3" id="20_h3aqd"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/المشي على العشب/المشي على العشب5.MP3" id="21_uvxdc"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/المشي على العشب/المشي على العشب.MP3" id="22_3l1gv"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/دخول الماء.MP3" id="23_h3aqd"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/صوت تحت الماء بدون معدات غوص.MP3" id="24_uvxdc"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/الخروج من الغوص.MP3" id="25_3l1gv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0pvpp"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0pvpp"]
+radius = 0.25
+
+[node name="Components" type="Node3D"]
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="InteractionRay" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -3)
+collide_with_areas = true
+
+[node name="CameraEffects" type="Node3D" parent="Head/Camera3D"]
+
+[node name="CeilingCheck" type="ShapeCast3D" parent="Head"]
+shape = SubResource("SphereShape3D_0pvpp")
+target_position = Vector3(0, 0.8, 0)
+
+[node name="GroundCheck" type="RayCast3D" parent="."]
+position = Vector3(0, 0.3, 0)
+target_position = Vector3(0, -1.2, 0)
+
+[node name="StepDetector" type="Node3D" parent="."]
+
+[node name="LowerRay" type="RayCast3D" parent="StepDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+target_position = Vector3(0, 0, -0.7)
+
+[node name="UpperRay" type="RayCast3D" parent="StepDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+target_position = Vector3(0, 0, -0.7)
+
+[node name="StepDownRay" type="RayCast3D" parent="StepDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.6)
+target_position = Vector3(0, -0.8, 0)
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="Audio"]
+unit_size = 1.0
+max_distance = 15.0
+
+[node name="JumpPlayer" type="AudioStreamPlayer3D" parent="Audio"]
+unit_size = 1.0
+max_distance = 15.0
+
+[node name="LandPlayer" type="AudioStreamPlayer3D" parent="Audio"]
+unit_size = 1.0
+max_distance = 15.0
+
+[node name="MovementPlayer" type="AudioStreamPlayer3D" parent="Audio"]
+unit_size = 1.0
+max_distance = 15.0
+
+[node name="UnderwaterLoopPlayer" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="MovementComponent" type="Node" parent="."]
+script = ExtResource("3_8h4do")
+jump_sounds = Array[AudioStream]([ExtResource("3_l7x70")])
+
+[node name="CrouchComponent" type="Node" parent="."]
+script = ExtResource("3_rclgo")
+
+[node name="HeadBobComponent" type="Node" parent="."]
+script = ExtResource("5_87uja")
+
+[node name="FOVComponent" type="Node" parent="."]
+script = ExtResource("6_tn8gd")
+
+[node name="InteractionComponent" type="Node" parent="."]
+script = ExtResource("7_okfwm")
+
+[node name="FootstepComponent" type="Node" parent="."]
+script = ExtResource("8_4qt65")
+surfaces = Array[ExtResource("9_6g3n5")]([ExtResource("10_mgvvd")])
+default_surface = ExtResource("11_mgvvd")
+
+[node name="FallComponent" type="Node" parent="."]
+script = ExtResource("12_d4apd")
+
+[node name="SwimmingComponent" type="Node" parent="."]
+script = ExtResource("13_mfato")
+enter_water_sound = ExtResource("15_utphg")
+
+[node name="PlayerAudioComponent" type="Node" parent="."]
+script = ExtResource("16_28gy6")
+jump_sounds = Array[AudioStream]([ExtResource("3_l7x70")])
+landing_sounds = Array[AudioStream]([ExtResource("17_htc74")])
+default_footstep_sounds = Array[AudioStream]([ExtResource("18_g2abb"), ExtResource("19_usugv"), ExtResource("20_h3aqd"), ExtResource("21_uvxdc"), ExtResource("22_3l1gv")])
+dive_sound = ExtResource("23_h3aqd")
+surface_sound = ExtResource("25_3l1gv")
+underwater_loop_sound = ExtResource("24_uvxdc")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Crosshair" type="ColorRect" parent="UI"]
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+color = Color(1, 1, 1, 0.85)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InteractionUI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InteractionLabel" type="Label" parent="UI/InteractionUI"]
+layout_mode = 0
+offset_left = -250.0
+offset_top = 32.0
+offset_right = 250.0
+offset_bottom = 75.0
+text = "\"\""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UnderwaterOverlay" type="ColorRect" parent="UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.28627452, 0.30588236, 0.74509805)

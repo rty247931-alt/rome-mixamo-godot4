@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MixamoFootstepSurfaceData" format=3]
+
+[ext_resource type="Script" path="res://mixamo_player/systems/resources/footstep_surface_data.gd" id="1_0wbeg"]
+
+[resource]
+script = ExtResource("1_0wbeg")
+metadata/_custom_type_script = "uid://bpj51pih3qkcb"

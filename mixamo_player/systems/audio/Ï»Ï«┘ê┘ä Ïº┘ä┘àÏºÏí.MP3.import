@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://47sxlw8lggpr"
+path="res://.godot/imported/Ï»Ï«┘ê┘ä Ïº┘ä┘àÏºÏí.MP3-824afcc1daa69be94da2e259505626c6.mp3str"
+
+[deps]
+
+source_file="res://mixamo_player/systems/audio/Ï»Ï«┘ê┘ä Ïº┘ä┘àÏºÏí.MP3"
+dest_files=["res://.godot/imported/Ï»Ï«┘ê┘ä Ïº┘ä┘àÏºÏí.MP3-824afcc1daa69be94da2e259505626c6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

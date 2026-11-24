@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d0ieun7f4trmr"
+path="res://.godot/imported/01 - غوص عميق وانغماس في الماء مع فقاعات.wav-0975aea5a72a42bc60d5ad2986ba32fd.sample"
+
+[deps]
+
+source_file="res://mixamo_player/systems/audio/01 - غوص عميق وانغماس في الماء مع فقاعات.wav"
+dest_files=["res://.godot/imported/01 - غوص عميق وانغماس في الماء مع فقاعات.wav-0975aea5a72a42bc60d5ad2986ba32fd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

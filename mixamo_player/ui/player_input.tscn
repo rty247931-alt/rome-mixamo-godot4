@@ -1,0 +1,361 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://mixamo_player/player_input.gd" id="1"]
+[ext_resource type="Script" path="res://mixamo_player/ui/touch_controls.gd" id="2"]
+
+[sub_resource type="StyleBoxFlat" id="Normal"]
+bg_color = Color(0.035, 0.065, 0.11, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.78, 0.85, 0.85)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_left = 48
+corner_radius_bottom_right = 48
+content_margin_left = 10.0
+content_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="Pressed"]
+bg_color = Color(0.08, 0.55, 0.54, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.65, 1, 0.9, 1)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_left = 48
+corner_radius_bottom_right = 48
+
+[sub_resource type="StyleBoxFlat" id="Stick"]
+bg_color = Color(0.025, 0.05, 0.09, 0.65)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.45, 0.78, 0.85, 0.8)
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_left = 150
+corner_radius_bottom_right = 150
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(0.025, 0.04, 0.075, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.27, 0.65, 0.72, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_left = 20
+corner_radius_bottom_right = 20
+
+[sub_resource type="Theme" id="Theme"]
+default_font_size = 22
+Button/styles/normal = SubResource("Normal")
+Button/styles/hover = SubResource("Normal")
+Button/styles/pressed = SubResource("Pressed")
+Button/styles/focus = SubResource("Normal")
+
+[node name="PlayerInput" type="CanvasLayer"]
+layer = 30
+process_mode = 3
+script = ExtResource("1")
+
+[node name="TouchControls" type="Control" parent="."]
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme")
+script = ExtResource("2")
+
+[node name="SafeArea" type="Control" parent="TouchControls"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+
+[node name="LookArea" type="Control" parent="TouchControls/SafeArea"]
+layout_mode = 1
+anchor_left = 0.38
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Controls" type="Control" parent="TouchControls/SafeArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Joystick" type="Panel" parent="TouchControls/SafeArea/Controls"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -240.0
+offset_right = 240.0
+offset_bottom = -32.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Stick")
+metadata/action = "stick"
+metadata/title = "عصا الحركة"
+
+[node name="Knob" type="Panel" parent="TouchControls/SafeArea/Controls/Joystick"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 66.0
+offset_right = 142.0
+offset_bottom = 142.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Pressed")
+
+[node name="Jump" type="Button" parent="TouchControls/SafeArea/Controls"]
+layout_mode = 1
+anchor_left = 1
+anchor_right = 1
+anchor_top = 1
+anchor_bottom = 1
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -24.0
+offset_bottom = -24.0
+mouse_filter = 2
+focus_mode = 0
+text = "قفز"
+metadata/action = "jump"
+metadata/title = "قفز"
+
+[node name="Run" type="Button" parent="TouchControls/SafeArea/Controls"]
+layout_mode = 1
+anchor_left = 1
+anchor_right = 1
+anchor_top = 1
+anchor_bottom = 1
+offset_left = -244.0
+offset_top = -128.0
+offset_right = -140.0
+offset_bottom = -24.0
+mouse_filter = 2
+focus_mode = 0
+text = "ركض"
+metadata/action = "run"
+metadata/title = "ركض"
+
+[node name="Crouch" type="Button" parent="TouchControls/SafeArea/Controls"]
+layout_mode = 1
+anchor_left = 1
+anchor_right = 1
+anchor_top = 1
+anchor_bottom = 1
+offset_left = -244.0
+offset_top = -244.0
+offset_right = -140.0
+offset_bottom = -140.0
+mouse_filter = 2
+focus_mode = 0
+text = "انحناء"
+metadata/action = "crouch"
+metadata/title = "انحناء"
+
+[node name="Interact" type="Button" parent="TouchControls/SafeArea/Controls"]
+layout_mode = 1
+anchor_left = 1
+anchor_right = 1
+anchor_top = 1
+anchor_bottom = 1
+offset_left = -128.0
+offset_top = -244.0
+offset_right = -24.0
+offset_bottom = -140.0
+mouse_filter = 2
+focus_mode = 0
+text = "تفاعل"
+metadata/action = "use"
+metadata/title = "تفاعل"
+
+[node name="ZoomIn" type="Button" parent="TouchControls/SafeArea/Controls"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0
+anchor_bottom = 0
+offset_left = -72.0
+offset_top = 24.0
+offset_right = -8.0
+offset_bottom = 88.0
+mouse_filter = 2
+focus_mode = 0
+text = "+"
+metadata/action = "zoom_in"
+metadata/title = "+"
+
+[node name="ZoomOut" type="Button" parent="TouchControls/SafeArea/Controls"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0
+anchor_bottom = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 72.0
+offset_bottom = 88.0
+mouse_filter = 2
+focus_mode = 0
+text = "−"
+metadata/action = "zoom_out"
+metadata/title = "−"
+
+[node name="Respawn" type="Button" parent="TouchControls/SafeArea/Controls"]
+layout_mode = 1
+anchor_left = 0
+anchor_right = 0
+anchor_top = 0
+anchor_bottom = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 144.0
+offset_bottom = 88.0
+mouse_filter = 2
+focus_mode = 0
+text = "عودة"
+metadata/action = "reset"
+metadata/title = "عودة"
+
+[node name="EditButton" type="Button" parent="TouchControls/SafeArea"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -184.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 88.0
+focus_mode = 0
+text = "تعديل التحكم"
+
+[node name="Editor" type="PanelContainer" parent="TouchControls/SafeArea"]
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -328.0
+offset_top = 104.0
+offset_right = 328.0
+offset_bottom = 410.0
+theme_override_styles/panel = SubResource("Panel")
+
+[node name="Margin" type="MarginContainer" parent="TouchControls/SafeArea/Editor"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Rows" type="VBoxContainer" parent="TouchControls/SafeArea/Editor/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Selected" type="Label" parent="TouchControls/SafeArea/Editor/Margin/Rows"]
+layout_mode = 2
+text = "اسحب أي زر لتغيير مكانه، ثم عدّل حجمه"
+horizontal_alignment = 1
+
+[node name="SizeRow" type="HBoxContainer" parent="TouchControls/SafeArea/Editor/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="TouchControls/SafeArea/Editor/Margin/Rows/SizeRow"]
+custom_minimum_size = Vector2(190, 44)
+layout_mode = 2
+text = "حجم العنصر"
+
+[node name="Size" type="HSlider" parent="TouchControls/SafeArea/Editor/Margin/Rows/SizeRow"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.7
+max_value = 1.6
+step = 0.05
+value = 1
+
+[node name="SensitivityRow" type="HBoxContainer" parent="TouchControls/SafeArea/Editor/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="TouchControls/SafeArea/Editor/Margin/Rows/SensitivityRow"]
+custom_minimum_size = Vector2(190, 44)
+layout_mode = 2
+text = "حساسية الكاميرا"
+
+[node name="Sensitivity" type="HSlider" parent="TouchControls/SafeArea/Editor/Margin/Rows/SensitivityRow"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.001
+max_value = 0.02
+step = 0.001
+value = 0.006
+
+[node name="OpacityRow" type="HBoxContainer" parent="TouchControls/SafeArea/Editor/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="TouchControls/SafeArea/Editor/Margin/Rows/OpacityRow"]
+custom_minimum_size = Vector2(190, 44)
+layout_mode = 2
+text = "وضوح الأزرار"
+
+[node name="Opacity" type="HSlider" parent="TouchControls/SafeArea/Editor/Margin/Rows/OpacityRow"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.25
+max_value = 1
+step = 0.05
+value = 0.85
+
+[node name="Toggles" type="HBoxContainer" parent="TouchControls/SafeArea/Editor/Margin/Rows"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="Run" type="CheckButton" parent="TouchControls/SafeArea/Editor/Margin/Rows/Toggles"]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+text = "تثبيت الركض"
+focus_mode = 0
+
+[node name="Crouch" type="CheckButton" parent="TouchControls/SafeArea/Editor/Margin/Rows/Toggles"]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+text = "تثبيت الانحناء"
+focus_mode = 0
+
+[node name="Actions" type="HBoxContainer" parent="TouchControls/SafeArea/Editor/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Reset" type="Button" parent="TouchControls/SafeArea/Editor/Margin/Rows/Actions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "استعادة التخطيط"
+focus_mode = 0
+
+[node name="Done" type="Button" parent="TouchControls/SafeArea/Editor/Margin/Rows/Actions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "حفظ وإغلاق"
+focus_mode = 0
+

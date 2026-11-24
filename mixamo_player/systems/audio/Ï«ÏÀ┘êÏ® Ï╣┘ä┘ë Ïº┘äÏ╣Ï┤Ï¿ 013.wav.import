@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bq1xdkyrqvnjm"
+path="res://.godot/imported/خطوة على العشب 013.wav-923beabe3afed25ac7f93f586f7f41e7.sample"
+
+[deps]
+
+source_file="res://mixamo_player/systems/audio/خطوة على العشب 013.wav"
+dest_files=["res://.godot/imported/خطوة على العشب 013.wav-923beabe3afed25ac7f93f586f7f41e7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

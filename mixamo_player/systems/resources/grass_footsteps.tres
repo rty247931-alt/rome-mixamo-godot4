@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MixamoFootstepSurfaceData" format=3]
+
+[ext_resource type="Script" path="res://mixamo_player/systems/resources/footstep_surface_data.gd" id="1_e5svq"]
+[ext_resource type="AudioStream" path="res://mixamo_player/systems/audio/01 - غوص عميق وانغماس في الماء مع فقاعات.wav" id="2_1mn17"]
+
+[resource]
+script = ExtResource("1_e5svq")
+surface_id = &"grass"
+sounds = Array[AudioStream]([ExtResource("2_1mn17")])
+metadata/_custom_type_script = "uid://bpj51pih3qkcb"
