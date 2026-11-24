@@ -33,7 +33,7 @@ jobs:
       - name: Install Arabic UI font
         run: |
           mkdir -p fonts
-          curl -fL "https://raw.githubusercontent.com/google/fonts/main/ofl/notosansarabic/NotoSansArabic%5Bwght%5D.ttf" -o fonts/NotoSansArabic.ttf
+          curl -fL "https://raw.githubusercontent.com/google/fonts/main/ofl/notosansarabic/NotoSansArabic%5Bwdth%2Cwght%5D.ttf" -o fonts/NotoSansArabic.ttf
 
       - name: Import project assets
         run: godot --headless --editor --path . --quit
