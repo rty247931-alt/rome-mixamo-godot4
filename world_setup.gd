@@ -35,6 +35,7 @@ func _apply_city_textures(root: Node) -> void:
                     material.emission_enabled = true
                     material.emission = Color(1.0, 0.12, 0.015, 1.0)
                     material.emission_energy_multiplier = 1.4
+                    child.set_surface_override_material(surface_index, material)
                 elif material_name.contains("attachment") or node_name.contains("small figures"):
                     material.albedo_texture = FIGURES_ATLAS
                     child.set_surface_override_material(surface_index, material)
