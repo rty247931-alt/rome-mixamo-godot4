@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="PackedScene" path="res://mixamo_player/player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://city/Final_meshFix_FinalUV_Everything.fbx" id="2_city"]
 [ext_resource type="Script" path="res://world_setup.gd" id="3_world"]
+[ext_resource type="Script" path="res://city_life.gd" id="4_life"]
 
 [sub_resource type="Environment" id="Environment"]
 background_mode = 1
@@ -23,6 +24,9 @@ light_energy = 1.15
 shadow_enabled = true
 
 [node name="City" parent="." instance=ExtResource("2_city")]
+
+[node name="CityLife" type="Node3D" parent="."]
+script = ExtResource("4_life")
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector3(0, 2, 0)
